@@ -4,19 +4,34 @@ from mathutils import Vector
 
 class Character(bge.types.KX_PythonComponent):
     args = OrderedDict([
-        # definindo opcoens modulares para upbge
         ("Walk Speed", 0.1), 
         ("Run Speed", 0.2), 
+        ("Armature name:", ""), 
+        ("============", False), 
         ("Anime idle name:", ""), 
         ("Anime idle S_frame:", 0), 
-        ("Anime idle E_frame:", 0)
+        ("Anime idle E_frame:", 0), 
+        ("Anime idle priorit:", 0), 
+        ("...............", False), 
+        ("Anime run name:", ""), 
+        ("Anime run S_frame:", 0), 
+        ("Anime run E_frame:", 0), 
+        ("Anime run priorit:", 0)
     ])
     def start(self, args):
         # criando listas de animacoens
-        self.idle = (args["Anime idle name:"], args["Anime idle S_frame:"], args["Anime idle E_frame:"])
+        self.idle = (args["Anime idle name:"], 
+        args["Anime idle S_frame:"], 
+        args["Anime idle E_frame:"], 
+        args["Anime idle priorit:"])
+        print(self.idle)
 
         # pegando a fisica Character
         self.character = bge.constraints.getCharacter(self.object)
+        
+        # pegando armature
+        self.armature = self.object.children.get(args["Armature name:"])
+        print(self.armature)
 
         # pegando velocidades
         self.walkSpeed = args["Walk Speed"]

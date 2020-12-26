@@ -98,9 +98,11 @@ class Character(bge.types.KX_PythonComponent):
             if keyboard[bge.events.EKEY].active:
                 control = 1
                 x = 1
+                self.armature.playAction(runR[0], runR[1], runR[2], blendin = 10, priority = runR[3])
             elif keyboard[bge.events.QKEY].active:
                 control = 1
                 x = -1
+                self.armature.playAction(runL[0], runL[1], runL[2], blendin = 10, priority = runL[3])
             if keyboard[bge.events.DKEY].active:
                 control = 1
                 rot = -1
@@ -109,6 +111,7 @@ class Character(bge.types.KX_PythonComponent):
                 control = 1
                 rot = 1
                 self.armature.playAction(turn[0], turn[1], turn[2], blendin = 10, play_mode = 0, priority = turn[3])
+            
             if control == 0:
                 self.armature.playAction(idle[0], idle[1], idle[2], blendin = 10, priority = idle[3])
 
